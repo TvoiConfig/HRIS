@@ -30,8 +30,23 @@
           <span class="fs-4">HRIS</span>
         </a>
         <ul class="nav nav-pills">
+            {% if user.is_authenticated %}
             <li class="nav-item"><a href="{% url 'staff' %}" class="nav-link">Сотрудники</a></li>
              <li class="nav-item"><a href="{% url 'orders' %}" class="nav-link">Добавить сотрудника</a></li>
+            {% else %}
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link">{{ user }}</a> </li>
+            <a class="nav-link active" href="{% url 'exit' %}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выйти</a>
+
+            <form id="logout-form" action="{% url 'exit' %}" method="post" style="display: none;">
+                {% csrf_token %}
+            </form>
+            {% else %}
+            <li class="nav-item"><a href="{% url 'user' %}" class="nav-link">Войти</a> </li>
+            <li class="nav-item"><a href="{% url 'reg' %}" class="nav-link active">Регистрация</a> </li>
+            {% endif %}
           </ul>
         </header>
       </div>

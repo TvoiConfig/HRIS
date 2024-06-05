@@ -19,7 +19,14 @@
             <h1 class="fw-light">ИС отдела кадров</h1>
             <p class="lead text-muted">Учет списка сотрудников</p>
             <p>
-                <a href="{% url 'staff' %}" class="btn btn-primary my-2">Сотрудники</a>
+                  {% if user.is_authenticated %}
+                  <a href="{% url 'staff' %}" class="btn btn-primary my-2">Сотрудники</a>
+                  {% else %}
+                      <h1 class="lead text-muted">Перед использованием необходима регистрация</h1>
+                      <a href="{% url 'reg' %}" class="btn btn-primary my-2">Зарегестрироваться</a>
+
+                  {% endif %}
+
 
             </p>
         </div>
