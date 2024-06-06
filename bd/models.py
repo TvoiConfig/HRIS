@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Staff(models.Model):
@@ -10,7 +12,6 @@ class Staff(models.Model):
     name = models.CharField(max_length=50, verbose_name="ФИО")
     type = models.CharField(max_length=50, choices=CHOICE_TYPE, default='1', verbose_name="Ставка")
     character = models.TextField(max_length=100, verbose_name="Должность")
-    price = models.IntegerField(verbose_name="Зарплата")
     image = models.ImageField(null=True, blank=True, upload_to="image/")
 
     class Meta:
@@ -132,3 +133,45 @@ class DjangoSession(models.Model):
     class Meta:
         managed = False
         db_table = 'django_session'
+
+
+
+
+
+
+class office(models.Model):
+    number = models.CharField('Наименование отдела', default="", max_length=20)
+
+    class Meta:
+        # managed = False
+        db_table = 'offices'
+        verbose_name = 'отдел'
+        verbose_name_plural = 'отделы'
+
+    def __str__(self):
+        return f'{self.number}'
+
+
+class Application(models.Model):
+    date = models.DateTimeField(default=timezone.now, verbose_name='Дата и Время')
+    auth_user = models.ForeignKey(AuthUser, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Работник')
+    number_cab = models.ForeignKey(office, on_delete=models.CASCADE, null=True, blank=True,
+                                   verbose_name='Выберите отдел')
+    description = models.CharField('Зарплата', max_length=20)
+    worker = models.ForeignKey(
+        Staff,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Выберите сотрудника',
+    )
+
+
+    class Meta:
+        # managed = False
+        db_table = 'applications'
+        verbose_name = 'Выдача'
+        verbose_name_plural = 'Выдачи'
+
+    def __str__(self):
+        return f'{self.id} Отдел.{self.number_cab} Заявитель {self.auth_user}'

@@ -12,4 +12,5 @@ urlpatterns = [
     path('login/', authViews.LoginView.as_view(template_name='users/auth.html'), name='user'),
     path('exit/', authViews.LogoutView.as_view(template_name='main/index.html'), name='exit'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('record/', include('request.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -33,6 +33,7 @@
             {% if user.is_authenticated %}
             <li class="nav-item"><a href="{% url 'staff' %}" class="nav-link">Сотрудники</a></li>
              <li class="nav-item"><a href="{% url 'orders' %}" class="nav-link">Добавить сотрудника</a></li>
+                <li class="nav-item"><a href="{% url 'request:record' %}" class="nav-link">Выдать ЗП</a></li>
             {% else %}
             {% endif %}
 

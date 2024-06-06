@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 class StaffsForm(forms.ModelForm):
     class Meta:
         model = Staff
-        fields = ['name', 'type', 'character', 'price', 'image']
+        fields = ['name', 'type', 'character', 'image']
 
 
 class RegisterUserForms(UserCreationForm):
