@@ -23,3 +23,4 @@
 7. При возможных ошибках следует попробавть выполнить миграцию БД командами:
     python manage.py makemigrations
     python manage.py migrate
+8. Если не помогло удалить из bd migrations и вернутся к прошлому пункту
